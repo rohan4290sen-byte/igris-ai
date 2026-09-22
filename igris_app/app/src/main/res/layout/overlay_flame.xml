@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="8dp">
+
+    <!-- Status Tooltip Bubble -->
+    <TextView
+        android:id="@+id/tvOverlayStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/card_dark_bg"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
+        android:textColor="@color/neon_cyan"
+        android:textSize="12sp"
+        android:text="Igris Ready"
+        android:visibility="gone"
+        android:layout_marginBottom="4dp" />
+
+    <!-- Draggable Floating Shadow Flame Orb -->
+    <FrameLayout
+        android:id="@+id/flameContainer"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:background="@drawable/shadow_flame_glow"
+        android:clickable="true"
+        android:focusable="true">
+
+        <TextView
+            android:id="@+id/tvFlameIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="🔥"
+            android:textSize="30sp" />
+
+    </FrameLayout>
+
+</LinearLayout>

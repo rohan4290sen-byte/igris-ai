@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Igris AI</string>
+    <string name="activate_igris">ACTIVATE IGRIS</string>
+    <string name="stop_igris">DEACTIVATE IGRIS</string>
+    <string name="overlay_permission_desc">Enable overlay permission so the Shadow Flame can float on your screen.</string>
+</resources>

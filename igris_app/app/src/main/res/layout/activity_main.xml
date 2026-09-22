@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/dark_bg"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp"
+        android:gravity="center_horizontal">
+
+        <!-- Title & Badass Tagline -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="⚡ IGRIS ⚡"
+            android:textColor="@color/shadow_purple_light"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            android:layout_marginTop="20dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SHADOW KNIGHT AI SYSTEM"
+            android:textColor="@color/shadow_purple_primary"
+            android:textSize="14sp"
+            android:letterSpacing="0.15"
+            android:layout_marginBottom="24dp" />
+
+        <!-- Floating Shadow Flame Preview Card -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/card_dark_bg"
+            android:padding="20dp"
+            android:gravity="center"
+            android:layout_marginBottom="20dp">
+
+            <FrameLayout
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:background="@drawable/shadow_flame_glow"
+                android:layout_marginBottom="12dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="🔥"
+                    android:textSize="36sp" />
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/tvStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Status: Standing By"
+                android:textColor="@color/neon_cyan"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Flame will float over all apps when activated"
+                android:textColor="@color/gray_text"
+                android:textSize="12sp"
+                android:layout_marginTop="4dp" />
+        </LinearLayout>
+
+        <!-- Gemini API Key Input -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/card_dark_bg"
+            android:padding="16dp"
+            android:layout_marginBottom="24dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Gemini AI Brain Key"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="8dp" />
+
+            <EditText
+                android:id="@+id/etApiKey"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Paste Gemini API Key here"
+                android:textColorHint="@color/gray_text"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:background="#202035"
+                android:padding="12dp"
+                android:singleLine="true" />
+        </LinearLayout>
+
+        <!-- Big Activate Button -->
+        <Button
+            android:id="@+id/btnToggleIgris"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="ACTIVATE IGRIS FLAME"
+            android:backgroundTint="@color/shadow_purple_primary"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Permissions Button (if needed) -->
+        <Button
+            android:id="@+id/btnPermissions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="GRANT SYSTEM PERMISSIONS"
+            android:backgroundTint="#24243B"
+            android:textColor="@color/shadow_purple_light"
+            android:textSize="13sp" />
+
+    </LinearLayout>
+</ScrollView>
