@@ -24,25 +24,23 @@ jobs:
       with:
         gradle-version: '8.2'
 
-    - name: Auto-Configure Gradle & Fix Project
+    - name: Fix Gradle Build Files
       run: |
-        cat << 'EOF' > igris_app/build.gradle
+        cat > igris_app/build.gradle << 'ENDOFFILE'
         plugins {
             id 'com.android.application' version '8.2.2' apply false
             id 'org.jetbrains.kotlin.android' version '1.9.22' apply false
         }
-        EOF
+        ENDOFFILE
 
-        cat << 'EOF' > igris_app/app/build.gradle
+        cat > igris_app/app/build.gradle << 'ENDOFFILE'
         plugins {
             id 'com.android.application'
             id 'org.jetbrains.kotlin.android'
         }
-
         android {
             namespace 'com.igris.ai'
             compileSdk 34
-
             defaultConfig {
                 applicationId "com.igris.ai"
                 minSdk 26
@@ -50,21 +48,12 @@ jobs:
                 versionCode 1
                 versionName "1.0"
             }
-
-            buildTypes {
-                release {
-                    minifyEnabled false
-                }
-            }
             compileOptions {
                 sourceCompatibility JavaVersion.VERSION_17
                 targetCompatibility JavaVersion.VERSION_17
             }
-            kotlinOptions {
-                jvmTarget = '17'
-            }
+            kotlinOptions { jvmTarget = '17' }
         }
-
         dependencies {
             implementation 'androidx.core:core-ktx:1.12.0'
             implementation 'androidx.appcompat:appcompat:1.6.1'
@@ -74,12 +63,56 @@ jobs:
             implementation 'com.google.code.gson:gson:2.10.1'
             implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3'
         }
-        EOF
+        ENDOFFILE
 
-        sed -i 's/@mipmap\/ic_launcher/@android:drawable\/sym_def_app_icon/g' igris_app/app/src/main/AndroidManifest.xml || true
-        sed -i 's/@mipmap\/ic_launcher_round/@android:drawable\/sym_def_app_icon/g' igris_app/app/src/main/AndroidManifest.xml || true
+    - name: Fix AndroidManifest.xml (Replace Completely)
+      run: |
+        cat > igris_app/app/src/main/AndroidManifest.xml << 'ENDOFFILE'
+        <?xml version="1.0" encoding="utf-8"?>
+        <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            package="com.igris.ai">
+            <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+            <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+            <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE" />
+            <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+            <uses-permission android:name="android.permission.RECORD_AUDIO" />
+            <uses-permission android:name="android.permission.CALL_PHONE" />
+            <uses-permission android:name="android.permission.READ_CONTACTS" />
+            <uses-permission android:name="android.permission.CAMERA" />
+            <uses-feature android:name="android.hardware.camera.flash" android:required="false" />
+            <uses-permission android:name="android.permission.INTERNET" />
+            <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+            <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES"
+                tools:ignore="QueryAllPackagesPermission" />
+            <application
+                android:allowBackup="true"
+                android:icon="@android:drawable/sym_def_app_icon"
+                android:label="@string/app_name"
+                android:supportsRtl="true"
+                android:theme="@style/Theme.Igris">
+                <activity
+                    android:name=".MainActivity"
+                    android:exported="true">
+                    <intent-filter>
+                        <action android:name="android.intent.action.MAIN" />
+                        <category android:name="android.intent.category.LAUNCHER" />
+                    </intent-filter>
+                </activity>
+                <service
+                    android:name=".FloatingFlameService"
+                    android:enabled="true"
+                    android:exported="false"
+                    android:foregroundServiceType="specialUse">
+                    <property
+                        android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
+                        android:value="Floating AI Assistant Overlay" />
+                </service>
+            </application>
+        </manifest>
+        ENDOFFILE
 
-    - name: Build APK with Gradle
+    - name: Build APK
       run: gradle assembleDebug --stacktrace
       working-directory: ./igris_app
 
